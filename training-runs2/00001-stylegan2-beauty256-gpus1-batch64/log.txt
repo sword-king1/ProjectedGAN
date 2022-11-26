@@ -1,0 +1,56 @@
+Loading training set...
+
+Num images:  8638
+Image shape: [3, 256, 256]
+Label shape: [0]
+
+Constructing networks...
+Setting up PyTorch plugin "bias_act_plugin"... Failed!
+Traceback (most recent call last):
+  File "train.py", line 267, in <module>
+    main() # pylint: disable=no-value-for-parameter
+  File "/mnt/LJH/wd/.conda/envs/pg/lib/python3.8/site-packages/click/core.py", line 1128, in __call__
+    return self.main(*args, **kwargs)
+  File "/mnt/LJH/wd/.conda/envs/pg/lib/python3.8/site-packages/click/core.py", line 1053, in main
+    rv = self.invoke(ctx)
+  File "/mnt/LJH/wd/.conda/envs/pg/lib/python3.8/site-packages/click/core.py", line 1395, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+  File "/mnt/LJH/wd/.conda/envs/pg/lib/python3.8/site-packages/click/core.py", line 754, in invoke
+    return __callback(*args, **kwargs)
+  File "train.py", line 253, in main
+    launch_training(c=c, desc=desc, outdir=opts.outdir, dry_run=opts.dry_run)
+  File "train.py", line 101, in launch_training
+    subprocess_fn(rank=0, c=c, temp_dir=temp_dir)
+  File "train.py", line 47, in subprocess_fn
+    training_loop.training_loop(rank=rank, **c)
+  File "/mnt/LJH/wd/projected-fixed/projected_gan-main/training/training_loop.py", line 195, in training_loop
+    img = misc.print_module_summary(G, [z, c])
+  File "/mnt/LJH/wd/projected-fixed/projected_gan-main/torch_utils/misc.py", line 218, in print_module_summary
+    outputs = module(*inputs)
+  File "/mnt/LJH/wd/.conda/envs/pg/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1208, in _call_impl
+    result = forward_call(*input, **kwargs)
+  File "/mnt/LJH/wd/projected-fixed/projected_gan-main/pg_modules/networks_stylegan2.py", line 535, in forward
+    ws = self.mapping(z, c, truncation_psi=truncation_psi, truncation_cutoff=truncation_cutoff, update_emas=update_emas)
+  File "/mnt/LJH/wd/.conda/envs/pg/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1208, in _call_impl
+    result = forward_call(*input, **kwargs)
+  File "/mnt/LJH/wd/projected-fixed/projected_gan-main/pg_modules/networks_stylegan2.py", line 238, in forward
+    x = layer(x)
+  File "/mnt/LJH/wd/.conda/envs/pg/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1208, in _call_impl
+    result = forward_call(*input, **kwargs)
+  File "/mnt/LJH/wd/projected-fixed/projected_gan-main/pg_modules/networks_stylegan2.py", line 118, in forward
+    x = bias_act.bias_act(x, b, act=self.activation)
+  File "/mnt/LJH/wd/projected-fixed/projected_gan-main/torch_utils/ops/bias_act.py", line 84, in bias_act
+    if impl == 'cuda' and x.device.type == 'cuda' and _init():
+  File "/mnt/LJH/wd/projected-fixed/projected_gan-main/torch_utils/ops/bias_act.py", line 41, in _init
+    _plugin = custom_ops.get_plugin(
+  File "/mnt/LJH/wd/projected-fixed/projected_gan-main/torch_utils/custom_ops.py", line 136, in get_plugin
+    torch.utils.cpp_extension.load(name=module_name, build_directory=cached_build_dir,
+  File "/mnt/LJH/wd/.conda/envs/pg/lib/python3.8/site-packages/torch/utils/cpp_extension.py", line 1284, in load
+    return _jit_compile(
+  File "/mnt/LJH/wd/.conda/envs/pg/lib/python3.8/site-packages/torch/utils/cpp_extension.py", line 1508, in _jit_compile
+    _write_ninja_file_and_build_library(
+  File "/mnt/LJH/wd/.conda/envs/pg/lib/python3.8/site-packages/torch/utils/cpp_extension.py", line 1592, in _write_ninja_file_and_build_library
+    verify_ninja_availability()
+  File "/mnt/LJH/wd/.conda/envs/pg/lib/python3.8/site-packages/torch/utils/cpp_extension.py", line 1648, in verify_ninja_availability
+    raise RuntimeError("Ninja is required to load C++ extensions")
+RuntimeError: Ninja is required to load C++ extensions

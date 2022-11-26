@@ -1,0 +1,75 @@
+{
+  "G_kwargs": {
+    "class_name": "pg_modules.networks_stylegan2.Generator",
+    "z_dim": 64,
+    "w_dim": 128,
+    "mapping_kwargs": {
+      "num_layers": 2
+    },
+    "channel_base": 32768,
+    "channel_max": 512,
+    "fused_modconv_default": "inference_only"
+  },
+  "G_opt_kwargs": {
+    "class_name": "torch.optim.Adam",
+    "betas": [
+      0,
+      0.99
+    ],
+    "eps": 1e-08,
+    "lr": 0.002
+  },
+  "D_opt_kwargs": {
+    "class_name": "torch.optim.Adam",
+    "betas": [
+      0,
+      0.99
+    ],
+    "eps": 1e-08,
+    "lr": 0.002
+  },
+  "data_loader_kwargs": {
+    "pin_memory": true,
+    "prefetch_factor": 2,
+    "num_workers": 3
+  },
+  "training_set_kwargs": {
+    "class_name": "training.dataset.ImageFolderDataset",
+    "path": "./data/beauty256.zip",
+    "use_labels": false,
+    "max_size": 4319,
+    "xflip": true,
+    "resolution": 256,
+    "random_seed": 0
+  },
+  "num_gpus": 1,
+  "batch_size": 64,
+  "batch_gpu": 8,
+  "metrics": [
+    "fid50k_full"
+  ],
+  "total_kimg": 600,
+  "kimg_per_tick": 4,
+  "image_snapshot_ticks": 50,
+  "network_snapshot_ticks": 50,
+  "random_seed": 0,
+  "ema_kimg": 20.0,
+  "restart_every": 9999999,
+  "loss_kwargs": {
+    "class_name": "training.loss.ProjectedGANLoss"
+  },
+  "D_kwargs": {
+    "class_name": "pg_modules.discriminator.ProjectedDiscriminator",
+    "diffaug": true,
+    "interp224": false,
+    "backbone_kwargs": {
+      "cout": 64,
+      "expand": true,
+      "proj_type": 2,
+      "num_discs": 4,
+      "separable": true,
+      "cond": false
+    }
+  },
+  "run_dir": "./training-runs2/00001-stylegan2-beauty256-gpus1-batch64"
+}

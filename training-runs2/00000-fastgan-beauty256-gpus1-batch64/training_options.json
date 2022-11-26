@@ -1,0 +1,71 @@
+{
+  "G_kwargs": {
+    "class_name": "pg_modules.networks_fastgan.Generator",
+    "cond": false,
+    "synthesis_kwargs": {
+      "lite": false
+    }
+  },
+  "G_opt_kwargs": {
+    "class_name": "torch.optim.Adam",
+    "betas": [
+      0,
+      0.99
+    ],
+    "eps": 1e-08,
+    "lr": 0.0002
+  },
+  "D_opt_kwargs": {
+    "class_name": "torch.optim.Adam",
+    "betas": [
+      0,
+      0.99
+    ],
+    "eps": 1e-08,
+    "lr": 0.0002
+  },
+  "data_loader_kwargs": {
+    "pin_memory": true,
+    "prefetch_factor": 2,
+    "num_workers": 3
+  },
+  "training_set_kwargs": {
+    "class_name": "training.dataset.ImageFolderDataset",
+    "path": "./data/beauty256.zip",
+    "use_labels": false,
+    "max_size": 4319,
+    "xflip": true,
+    "resolution": 256,
+    "random_seed": 0
+  },
+  "num_gpus": 1,
+  "batch_size": 64,
+  "batch_gpu": 8,
+  "metrics": [
+    "fid50k_full"
+  ],
+  "total_kimg": 600,
+  "kimg_per_tick": 4,
+  "image_snapshot_ticks": 50,
+  "network_snapshot_ticks": 50,
+  "random_seed": 0,
+  "ema_kimg": 20.0,
+  "restart_every": 9999999,
+  "loss_kwargs": {
+    "class_name": "training.loss.ProjectedGANLoss"
+  },
+  "D_kwargs": {
+    "class_name": "pg_modules.discriminator.ProjectedDiscriminator",
+    "diffaug": true,
+    "interp224": false,
+    "backbone_kwargs": {
+      "cout": 64,
+      "expand": true,
+      "proj_type": 2,
+      "num_discs": 4,
+      "separable": false,
+      "cond": false
+    }
+  },
+  "run_dir": "./training-runs2/00000-fastgan-beauty256-gpus1-batch64"
+}
