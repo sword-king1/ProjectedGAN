@@ -86,6 +86,8 @@ dependencies:
     - timm==0.4.12
     - tk==0.1.0
     - toml==0.10.2
+    - torch==1.12.1
+    - torchvision==0.13.1+cu116
     - tornado==6.1
     - tqdm==4.62.2
     - typing-extensions==3.10.0.2
